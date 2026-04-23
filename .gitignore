@@ -1,0 +1,22 @@
+# Ignore build and runtime artifacts
+clamav-db/
+*.log
+*.pid
+*.sock
+*.swp
+*.tmp
+*.bak
+*.old
+*.core
+*.out
+*.o
+*.pyc
+__pycache__/
+# Ignore test files
+*.test
+# Ignore editor/OS files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+.env

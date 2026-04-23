@@ -1,0 +1,22 @@
+services:
+  clamav:
+    build: .
+    container_name: clamav
+    ports:
+      - "3310:3310"
+    volumes:
+      - clamav-db:/var/lib/clamav
+      - ./clamav:/etc/clamav
+      # - clamav-logs:/var/log/clamav
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "clamdscan", "--version"]
+      interval: 1m
+      timeout: 10s
+      retries: 3
+
+volumes:
+  clamav-db:
+    driver: local
+  # clamav-logs:
+  #   driver: local
