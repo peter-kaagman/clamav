@@ -2,6 +2,10 @@
 
 This repository provides a production-ready ClamAV (antivirus) Docker image, including example configuration for Docker Compose and Kubernetes.
 
+## Disclaimer
+
+This container image and configuration are provided to give you full control over what runs in your cluster. No guarantees are given regarding the correctness, security, or suitability of this ClamAV implementation. Use at your own risk. This project is considered work in progress and may change at any time.
+
 ## Features
 - Minimal Dockerfile for ClamAV
 - Example `docker-compose.yml` and `Dockerfile`, config in `./clamav/`
