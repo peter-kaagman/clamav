@@ -8,9 +8,13 @@ on:
     tags:
       - 'v*'
 
+
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
+    permissions:
+          contents: read
+          packages: write
     env:
       REGISTRY: ghcr.io
       IMAGE_NAME: ${{ github.repository }}
@@ -24,9 +28,9 @@ jobs:
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v3
         with:
-          registry: ${{ env.REGISTRY }}
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GHCR_TOKEN }}
 
       - name: Get tag name
         id: get_tag
@@ -40,5 +44,5 @@ jobs:
           context: .
           push: true
           tags: |
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.get_tag.outputs.tag }}
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+            ghcr.io/${{ github.repository_owner }}/clamav:${{ steps.get_tag.outputs.tag }}
+            ghcr.io/${{ github.repository_owner }}/clamav:latest
