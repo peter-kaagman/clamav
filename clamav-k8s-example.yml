@@ -5,6 +5,14 @@ metadata:
   namespace: default # change if needed
 data:
   clamd.conf: |
+    # For TCP performance
+    MaxThreads 8
+    MaxConnectionQueueLength 32
+    # For INSTREAM scans
+    StreamMaxLength 25M
+    # For TCP accessibility
+    TCPSocket 3310
+    TCPAddr 0.0.0.0
     # Container-optimized clamd.conf
     LocalSocket /var/run/clamav/clamd.ctl
     LocalSocketGroup clamav
@@ -118,6 +126,12 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: clamav-db-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
 spec:
   accessModes:
     - ReadWriteOnce
